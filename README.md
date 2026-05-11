@@ -8,6 +8,7 @@ A structured course built from personal study notes of the book *Linux Basics fo
 
 | # | Topic |
 |---|---|
+| i  | [Linux Basics For Hackers PDF.](Linux.pdf) |
 | 00 | [Getting Started & Setting Up Your Lab](Module_00_Getting_Started.md) |
 | 01 | [The Basics of the Terminal](Module_01_Terminal_Basics.md) |
 | 02 | [Text Manipulation](Module_02_Text_Manipulation.md) |
