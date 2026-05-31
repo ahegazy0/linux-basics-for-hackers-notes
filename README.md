@@ -47,6 +47,20 @@ A structured course built from personal study notes of the book *Linux Basics fo
 
 ---
 
+## Extra Resources
+
+Places to practice and go deeper after finishing the modules.
+
+| Resource | What it is |
+|---|---|
+| [LabEx - Linux Journey](https://labex.io/linuxjourney) | Interactive Linux lessons in the browser |
+| [OverTheWire - Bandit](https://overthewire.org/wargames/bandit/) | Learn Linux by solving security challenges via SSH |
+| [TryHackMe - Linux Fundamentals](https://tryhackme.com/module/linux-fundamentals) | Guided rooms covering Linux basics hands-on |
+| [CMD Challenge](https://cmdchallenge.com) | Practice terminal commands by solving small puzzles |
+| [Hack The Box - Linux Fundamentals](https://academy.hackthebox.com/course/preview/linux-fundamentals) | Professional-level Linux course for security |
+
+---
+
 ## Disclaimer
 
 This course is for educational purposes only. Everything here should be practiced in your own lab environment. Never test on systems you don't own or have explicit permission to test.
