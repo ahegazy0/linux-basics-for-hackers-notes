@@ -70,3 +70,8 @@ This course is for educational purposes only. Everything here should be practice
 ## Book
 
 > *Linux Basics for Hackers* by OccupyTheWeb — No Starch Press
+
+---
+
+## Interested in networking? 
+> You may also find my [Network Basics for Hackers Notes](https://github.com/ahegazy0/network-basics-for-hackers-notes)
