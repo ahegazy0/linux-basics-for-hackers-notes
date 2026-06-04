@@ -73,5 +73,5 @@ This course is for educational purposes only. Everything here should be practice
 
 ---
 
-## Interested in networking? 
+## Interested in Networking? 
 > You may also find my [Network Basics for Hackers Notes](https://github.com/ahegazy0/network-basics-for-hackers-notes)
