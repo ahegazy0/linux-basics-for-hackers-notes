@@ -1,11 +1,11 @@
 # Linux Basics for Hackers
-## Module 7 — Environment Variables
+## Module 7 - Environment Variables
 
 ---
 
-## What this module is about
+## Overview
 
-Your Linux system runs on a set of behind-the-scenes settings that control how everything behaves — where it looks for programs, who you are, what your home folder is, what your terminal prompt looks like. These are called **environment variables**. They're always there, you just haven't looked at them yet.
+Your Linux system runs on a set of behind-the-scenes settings that control how everything behaves - where it looks for programs, who you are, what your home folder is, what your terminal prompt looks like. These are called **environment variables**. They're always there, you just haven't looked at them yet.
 
 ---
 
@@ -18,11 +18,7 @@ Some are set by the system at boot. Some are set when you log in. And you can cr
 The naming convention is simple: variable names are usually all caps, and you reference them by putting a `$` in front of the name.
 
 ```bash
-echo $HOME
-```
-
-Output:
-```
+ahegazy0@kali:~$ echo $HOME
 /home/kali
 ```
 
@@ -41,16 +37,12 @@ Output:
 
 ---
 
-## PATH — the most important one
+## PATH - the most important one
 
 `$PATH` is a list of folder paths separated by colons. When you type a command like `ls`, the system doesn't magically know where `ls` lives. It goes through every folder listed in `$PATH`, one by one, until it finds a program with that name.
 
 ```bash
-echo $PATH
-```
-
-Output:
-```
+ahegazy0@kali:~$ echo $PATH
 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
@@ -65,7 +57,7 @@ This is why you get "command not found" sometimes. You installed a tool, but its
 ## Viewing all your environment variables
 
 ```bash
-env
+ahegazy0@kali:~$ env
 ```
 
 This prints every environment variable currently set in your session. There'll be more than you expect. Scroll through it and you'll recognize most of them.
@@ -77,19 +69,15 @@ This prints every environment variable currently set in your session. There'll b
 To create or change a variable just for your current terminal session:
 
 ```bash
-MYVAR="hello"
-echo $MYVAR
-```
-
-Output:
-```
+ahegazy0@kali:~$ MYVAR="hello"
+ahegazy0@kali:~$ echo $MYVAR
 hello
 ```
 
 The problem is this disappears the moment you close the terminal. To make it available to any child processes (programs you run from your terminal), you need to **export** it:
 
 ```bash
-export MYVAR="hello"
+ahegazy0@kali:~$ export MYVAR="hello"
 ```
 
 Now any program launched from that terminal can read `$MYVAR`.
@@ -97,7 +85,7 @@ Now any program launched from that terminal can read `$MYVAR`.
 To add a folder to your PATH without overwriting the existing one:
 
 ```bash
-export PATH=$PATH:/new/folder/here
+ahegazy0@kali:~$ export PATH=$PATH:/new/folder/here
 ```
 
 The `$PATH` at the start keeps everything that was already there. You're just appending `:new/folder/here` to the end. If you forget that part and just write `/new/folder/here`, you wipe everything else and break your PATH entirely.
@@ -111,25 +99,25 @@ The `$PATH` at the start keeps everything that was already there. You're just ap
 For bash, that file is `~/.bashrc`. Open it and add your export line at the bottom:
 
 ```bash
-export PATH=$PATH:/your/new/tool/folder
+ahegazy0@kali:~$ export PATH=$PATH:/your/new/tool/folder
 ```
 
 Save the file. Then either open a new terminal or run:
 
 ```bash
-source ~/.bashrc
+ahegazy0@kali:~$ source ~/.bashrc
 ```
 
 That reloads the file without needing to restart.
 
 ---
 
-## Changing your prompt — PS1
+## Changing your prompt - PS1
 
 `$PS1` controls what your command prompt looks like. By default it shows something like `kali@kali:~$`. You can change it to anything.
 
 ```bash
-export PS1="Hacker-Level-99: # "
+ahegazy0@kali:~$ export PS1="Hacker-Level-99: # "
 ```
 
 Your prompt now looks like:
@@ -137,7 +125,7 @@ Your prompt now looks like:
 Hacker-Level-99: # 
 ```
 
-It's mostly cosmetic, but some people set their prompt to show useful info — the current directory, the git branch they're on, the time. For now just know that PS1 is what controls it and you can edit it.
+It's mostly cosmetic, but some people set their prompt to show useful info - the current directory, the git branch they're on, the time. For now just know that PS1 is what controls it and you can edit it.
 
 ---
 
@@ -146,7 +134,7 @@ It's mostly cosmetic, but some people set their prompt to show useful info — t
 `$HISTSIZE` controls how many commands get saved to your history file. When you press the up arrow and scroll through past commands, that's history.
 
 ```bash
-export HISTSIZE=0
+ahegazy0@kali:~$ export HISTSIZE=0
 ```
 
 Setting it to 0 means nothing gets saved. The terminal stops logging your commands for the rest of that session. After you close the terminal, anyone who opens the history file won't see what you ran.
@@ -155,7 +143,7 @@ This is a basic operational security move. If you're on a system you're not supp
 
 ---
 
-## Command reference
+## Command Reference
 
 | Command | What it does |
 |---|---|
@@ -170,11 +158,12 @@ This is a basic operational security move. If you're on a system you're not supp
 
 ## Practice
 
-- Run `env` and find your `$SHELL` variable — it'll tell you exactly what shell you're running
-- Run `echo $PATH` and look at every folder listed — those are all the places your system looks for programs
-- Try `export HISTSIZE=0` then press the up arrow — your history is gone for this session
-- Change your PS1 to display just your name, or something custom, and watch the prompt update immediately
+- [ ] Run `env` and find your `$SHELL` variable - it'll tell you exactly what shell you're running
+- [ ] Run `echo $PATH` and look at every folder listed - those are all the places your system looks for programs
+- [ ] Try `export HISTSIZE=0` then press the up arrow - your history is gone for this session
+- [ ] Change your PS1 to display just your name, or something custom, and watch the prompt update immediately
 
+> 💡 *For deeper practice, I also recommend completing the end-of-chapter exercises in the official **Linux Basics for Hackers** book.*
 ---
 
-*Up next: Module 8 — Bash Scripting*
+*Up next: Module 8 - Bash Scripting*
