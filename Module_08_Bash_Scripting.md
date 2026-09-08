@@ -1,11 +1,11 @@
 # Linux Basics for Hackers
-## Module 8 — Bash Scripting
+## Module 8 - Bash Scripting
 
 ---
 
-## What this module is about
+## Overview
 
-A hacker who types the same commands over and over is wasting time. Scripting is how you automate that — you write the commands once in a file, and then you just run the file. This module covers how to write Bash scripts, from a basic "hello world" to something that actually takes input and does something useful with it.
+A hacker who types the same commands over and over is wasting time. Scripting is how you automate that - you write the commands once in a file, and then you just run the file. This module covers how to write Bash scripts, from a basic "hello world" to something that actually takes input and does something useful with it.
 
 ---
 
@@ -13,7 +13,7 @@ A hacker who types the same commands over and over is wasting time. Scripting is
 
 A script is a plain text file containing a list of commands. When you run it, Bash reads each line and executes it in order, the same as if you'd typed each command yourself. The difference is it happens in seconds and you never have to type it again.
 
-You can put any command in a script that you'd run in the terminal. `ls`, `ping`, `nmap`, `grep` — all of it works. And you can combine them with logic: if this output contains this string, run this other command. That's where the power comes from.
+You can put any command in a script that you'd run in the terminal. `ls`, `ping`, `nmap`, `grep` - all of it works. And you can combine them with logic: if this output contains this string, run this other command. That's where the power comes from.
 
 ---
 
@@ -25,7 +25,7 @@ Every Bash script starts with this on the very first line:
 #!/bin/bash
 ```
 
-This is called the **shebang** (or hashbang). It tells the system exactly which program to use to interpret the file. Without it, Linux might not know what to do with the file — or it might use the wrong shell and your script breaks in confusing ways.
+This is called the **shebang** (or hashbang). It tells the system exactly which program to use to interpret the file. Without it, Linux might not know what to do with the file - or it might use the wrong shell and your script breaks in confusing ways.
 
 Always put it first. No blank line before it, nothing.
 
@@ -43,7 +43,7 @@ echo "Hello, world"
 Save it. Now before you can run it, you need to make it executable:
 
 ```bash
-chmod 755 myscript.sh
+ahegazy0@kali:~$ chmod 755 myscript.sh
 ```
 
 This gives you permission to run it as a program. Without this step, Linux will refuse to execute it and just tell you "Permission denied."
@@ -51,11 +51,7 @@ This gives you permission to run it as a program. Without this step, Linux will 
 Now run it:
 
 ```bash
-./myscript.sh
-```
-
-Output:
-```
+ahegazy0@kali:~$ ./myscript.sh
 Hello, world
 ```
 
@@ -63,23 +59,19 @@ The `./` at the start means "run this file from the current directory." You need
 
 ---
 
-## echo — printing to the screen
+## echo - printing to the screen
 
 `echo` prints whatever you give it to the terminal. It's how your script communicates back to you.
 
 ```bash
-echo "Scan starting..."
-echo "Done."
+ahegazy0@kali:~$ echo "Scan starting..."
+ahegazy0@kali:~$ echo "Done."
 ```
 
 You can also echo variable values:
 
 ```bash
-echo "Your username is: $USER"
-```
-
-Output:
-```
+ahegazy0@kali:~$ echo "Your username is: $USER"
 Your username is: kali
 ```
 
@@ -87,15 +79,11 @@ Your username is: kali
 
 ## Variables in scripts
 
-Variables let you store data and reuse it. You assign them like this — no spaces around the `=`:
+Variables let you store data and reuse it. You assign them like this - no spaces around the `=`:
 
 ```bash
-name="Bob"
-echo "Hello, $name"
-```
-
-Output:
-```
+ahegazy0@kali:~$ name="Bob"
+ahegazy0@kali:~$ echo "Hello, $name"
 Hello, Bob
 ```
 
@@ -103,7 +91,7 @@ When you want to use the value stored in a variable, put `$` in front of the nam
 
 ---
 
-## read — taking input from the user
+## read - taking input from the user
 
 `read` pauses the script and waits for the user to type something, then stores what they typed in a variable.
 
@@ -125,14 +113,14 @@ Hello, Alice
 You can also do it on one line with the `-p` flag (prompt):
 
 ```bash
-read -p "Enter your name: " name
+ahegazy0@kali:~$ read -p "Enter your name: " name
 ```
 
 Cleaner. Does the same thing.
 
 ---
 
-## A practical example — ping scanner
+## A practical example - ping scanner
 
 This is a simple script that asks for an IP address and pings it. It's the kind of thing you'd actually use:
 
@@ -166,7 +154,7 @@ Comments are for you (and anyone else reading the script later). Write them as i
 
 ---
 
-## Conditional logic — if/else
+## Conditional logic - if/else
 
 Once you can make decisions in a script, it becomes genuinely useful. Basic syntax:
 
@@ -175,9 +163,9 @@ Once you can make decisions in a script, it becomes genuinely useful. Basic synt
 read -p "Enter a number: " num
 
 if [ $num -gt 10 ]; then
-    echo "That number is greater than 10"
+echo "That number is greater than 10"
 else
-    echo "That number is 10 or less"
+echo "That number is 10 or less"
 fi
 ```
 
@@ -196,15 +184,15 @@ For comparing strings, use `=` and `!=` inside the brackets.
 
 ---
 
-## Loops — doing something repeatedly
+## Loops - doing something repeatedly
 
 A `for` loop runs a block of commands multiple times:
 
 ```bash
 #!/bin/bash
 for i in 1 2 3 4 5; do
-    echo "Pinging 192.168.1.$i"
-    ping -c 1 192.168.1.$i
+echo "Pinging 192.168.1.$i"
+ping -c 1 192.168.1.$i
 done
 ```
 
@@ -212,7 +200,7 @@ This pings five different IP addresses one after another. This is basically a pr
 
 ---
 
-## Making scripts actually useful — the structure to follow
+## Making scripts actually useful - the structure to follow
 
 A script that's worth keeping usually has this shape:
 
@@ -239,28 +227,28 @@ Clean sections, comments on anything that needs explaining, and the logic flows 
 
 ---
 
-## File permissions recap — chmod
+## File permissions recap - chmod
 
 When you create a script, it's a regular text file by default. To run it, you need the execute permission set.
 
 ```bash
-chmod 755 myscript.sh
+ahegazy0@kali:~$ chmod 755 myscript.sh
 ```
 
 What `755` means:
-- `7` — owner can read, write, and execute
-- `5` — group can read and execute
-- `5` — everyone else can read and execute
+- `7` - owner can read, write, and execute
+- `5` - group can read and execute
+- `5` - everyone else can read and execute
 
-For personal scripts that only you need to run, `chmod 700` is fine — only you can do anything with it.
+For personal scripts that only you need to run, `chmod 700` is fine - only you can do anything with it.
 
 ---
 
-## Command reference
+## Command Reference
 
 | Command / Concept | What it does |
 |---|---|
-| `#!/bin/bash` | Shebang — must be the first line of every script |
+| `#!/bin/bash` | Shebang - must be the first line of every script |
 | `echo "text"` | Print text to the screen |
 | `read var` | Take user input and store it in a variable |
 | `read -p "prompt" var` | Same but with an inline prompt message |
@@ -268,7 +256,7 @@ For personal scripts that only you need to run, `chmod 700` is fine — only you
 | `$name` | Use the value of a variable |
 | `chmod 755 file.sh` | Make a script executable |
 | `./script.sh` | Run a script in the current directory |
-| `# comment` | A line Bash ignores — notes for humans |
+| `# comment` | A line Bash ignores - notes for humans |
 | `if [ ] then / fi` | Conditional logic |
 | `for x in ... do / done` | Loop over a list |
 
@@ -276,13 +264,14 @@ For personal scripts that only you need to run, `chmod 700` is fine — only you
 
 ## Practice
 
-- Write a script that asks for your name and prints "Hello, [name]"
-- Make it executable with `chmod 755` and run it with `./`
-- Write a second script that asks for an IP address and runs `ping -c 4` on it
-- Once that works, modify it to loop through a range like `192.168.1.1` to `192.168.1.5` and ping each one
+- [ ] Write a script that asks for your name and prints "Hello, [name]"
+- [ ] Make it executable with `chmod 755` and run it with `./`
+- [ ] Write a second script that asks for an IP address and runs `ping -c 4` on it
+- [ ] Once that works, modify it to loop through a range like `192.168.1.1` to `192.168.1.5` and ping each one
 
 The ping loop exercise is worth doing properly. It's a real technique and understanding how it works makes nmap output make more sense later.
 
+> 💡 *For deeper practice, I also recommend completing the end-of-chapter exercises in the official **Linux Basics for Hackers** book.*
 ---
 
-*Up next: Module 9 — Archiving & Compression*
+*Up next: Module 9 - Archiving & Compression*
