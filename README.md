@@ -1,6 +1,8 @@
-# Linux Basics for Hackers — Course
+# Linux Basics for Hackers - Notes
 
-A structured course built from personal study notes of the book *Linux Basics for Hackers* by OccupyTheWeb. Each module breaks down the core concepts, commands, and practical examples in plain English — straightforward enough for beginners, detailed enough to actually be useful.
+A structured set of study notes based on the book *Linux Basics for Hackers* by OccupyTheWeb. Originally compiled during personal lab practice in Obsidian, then structured and organized with AI assistance for clarity, consistency, and easy navigation.
+
+> **Update:** Visual architecture diagrams have been added across core modules to illustrate topics like the filesystem tree, command pipelines, permissions, and kernel space.
 
 ---
 
@@ -8,7 +10,6 @@ A structured course built from personal study notes of the book *Linux Basics fo
 
 | # | Topic |
 |---|---|
-| i  | [Linux Basics For Hackers PDF.](Linux.pdf) |
 | 00 | [Getting Started & Setting Up Your Lab](Module_00_Getting_Started.md) |
 | 01 | [The Basics of the Terminal](Module_01_Terminal_Basics.md) |
 | 02 | [Text Manipulation](Module_02_Text_Manipulation.md) |
@@ -69,7 +70,7 @@ This course is for educational purposes only. Everything here should be practice
 
 ## Book
 
-> *Linux Basics for Hackers* by OccupyTheWeb — No Starch Press
+> *Linux Basics for Hackers* by OccupyTheWeb - No Starch Press
 
 ---
 
