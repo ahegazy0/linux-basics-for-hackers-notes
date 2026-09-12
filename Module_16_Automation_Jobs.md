@@ -1,15 +1,15 @@
 # Linux Basics for Hackers
-## Module 16 — Automation & Scheduled Jobs
+## Module 16 - Automation & Scheduled Jobs
 
 ---
 
-## What this module is about
+## Overview
 
 Typing the same commands manually every day is a waste of time. Linux has a built-in scheduling system called cron that lets you tell the system to run any script or command at any time, on any schedule you define. This module covers how to set that up, how to make things run at startup, and how the whole automation system works.
 
 ---
 
-## Cron — the Linux scheduler
+## Cron - the Linux scheduler
 
 Cron is a background service that wakes up every minute, checks if any scheduled jobs are due to run, and executes them. It's been part of Unix systems for decades and is still the standard way to automate tasks on Linux.
 
@@ -35,7 +35,7 @@ Five time fields, then the command to run. The fields:
 | MONTH | 1–12 | Month of the year |
 | WEEKDAY | 0–7 | Day of the week (0 and 7 are both Sunday) |
 
-A `*` in any field means "every" — every minute, every hour, every day, etc.
+A `*` in any field means "every" - every minute, every hour, every day, etc.
 
 Some examples to make it concrete:
 
@@ -59,55 +59,55 @@ Some examples to make it concrete:
 0 * * * *  /path/to/script.sh
 ```
 
-The way to read them: fill in left to right. `0 3 * * 3` — at minute 0, hour 3, any day of the month, any month, but only on weekday 3 (Wednesday).
+The way to read them: fill in left to right. `0 3 * * 3` - at minute 0, hour 3, any day of the month, any month, but only on weekday 3 (Wednesday).
 
 ---
 
 ## Editing your crontab
 
 ```bash
-crontab -e
+ahegazy0@kali:~$ crontab -e
 ```
 
-This opens your personal crontab in a text editor. Add one job per line. Save and close — cron picks up the changes immediately.
+This opens your personal crontab in a text editor. Add one job per line. Save and close - cron picks up the changes immediately.
 
 **View your current crontab:**
 
 ```bash
-crontab -l
+ahegazy0@kali:~$ crontab -l
 ```
 
 **Remove all your cron jobs:**
 
 ```bash
-crontab -r
+ahegazy0@kali:~$ crontab -r
 ```
 
-Be careful with `-r` — there's no confirmation prompt and no undo.
+Be careful with `-r` - there's no confirmation prompt and no undo.
 
 **Edit root's crontab** (requires sudo):
 
 ```bash
-sudo crontab -e
+ahegazy0@kali:~$ sudo crontab -e
 ```
 
 Jobs in root's crontab run with full root permissions.
 
 ---
 
-## Shortcuts — special cron syntax
+## Shortcuts - special cron syntax
 
 Instead of the five-field format, cron supports some shorthand:
 
 | Shorthand | Equivalent to | When it runs |
 |---|---|---|
-| `@reboot` | — | Once, at system startup |
+| `@reboot` | - | Once, at system startup |
 | `@hourly` | `0 * * * *` | Every hour |
 | `@daily` | `0 0 * * *` | Every day at midnight |
 | `@weekly` | `0 0 * * 0` | Every Sunday at midnight |
 | `@monthly` | `0 0 1 * *` | First day of every month |
 
-`@reboot` is particularly useful — it runs your command once every time the system boots, regardless of time.
+`@reboot` is particularly useful - it runs your command once every time the system boots, regardless of time.
 
 ```bash
 @reboot  /home/kali/scripts/startup.sh
@@ -127,13 +127,13 @@ echo "System check: $(date)" >> /home/kali/check.log
 Save it as `check.sh`, make it executable:
 
 ```bash
-chmod 755 /home/kali/check.sh
+ahegazy0@kali:~$ chmod 755 /home/kali/check.sh
 ```
 
 Schedule it to run every minute to test it:
 
 ```bash
-crontab -e
+ahegazy0@kali:~$ crontab -e
 ```
 
 Add:
@@ -144,7 +144,7 @@ Add:
 Save, wait a couple of minutes, then check:
 
 ```bash
-cat /home/kali/check.log
+ahegazy0@kali:~$ cat /home/kali/check.log
 ```
 
 You should see new entries appearing. Once confirmed, change the schedule to whatever you actually want.
@@ -177,9 +177,9 @@ If you want the job to run silently with no output at all:
 For services rather than scripts, `systemctl enable` is the standard modern approach:
 
 ```bash
-systemctl enable mysql
-systemctl enable apache2
-systemctl enable ssh
+ahegazy0@kali:~$ systemctl enable mysql
+ahegazy0@kali:~$ systemctl enable apache2
+ahegazy0@kali:~$ systemctl enable ssh
 ```
 
 This creates the necessary symlinks so that systemd (the system and service manager) starts those services automatically during boot.
@@ -187,15 +187,15 @@ This creates the necessary symlinks so that systemd (the system and service mana
 Check what's currently enabled:
 
 ```bash
-systemctl list-unit-files --type=service | grep enabled
+ahegazy0@kali:~$ systemctl list-unit-files --type=service | grep enabled
 ```
 
-**The older method — update-rc.d:**
+**The older method - update-rc.d:**
 
 On older Debian/Ubuntu-based systems you may see `update-rc.d` used instead:
 
 ```bash
-update-rc.d mysql defaults
+ahegazy0@kali:~$ update-rc.d mysql defaults
 ```
 
 This registers a service with the old init.d startup system. `systemctl enable` does the same thing on modern systems and is what you should use going forward.
@@ -213,11 +213,11 @@ Alongside user crontabs, the system has its own scheduled directories:
 /etc/cron.monthly/    scripts here run every month
 ```
 
-Drop an executable script into any of these folders and it gets run on that schedule automatically — no crontab entry needed. System maintenance tasks and log rotation often work this way.
+Drop an executable script into any of these folders and it gets run on that schedule automatically - no crontab entry needed. System maintenance tasks and log rotation often work this way.
 
 ---
 
-## Command reference
+## Command Reference
 
 | Command | What it does |
 |---|---|
@@ -233,14 +233,15 @@ Drop an executable script into any of these folders and it gets run on that sche
 
 ## Practice
 
-- Open your crontab with `crontab -e` and add a job that writes the current date to a file every minute — verify it works after two minutes, then remove the job
-- Schedule a script to run at `@reboot` and confirm it executes after a reboot
-- Run `crontab -l` on root and see if there are any system jobs already scheduled
-- Enable MySQL to start at boot with `systemctl enable mysql`, then reboot and check if it's running with `systemctl status mysql`
-- Try to write the cron syntax for: every day at 6:30 AM, only on weekdays — work it out before checking the answer
+- [ ] Open your crontab with `crontab -e` and add a job that writes the current date to a file every minute - verify it works after two minutes, then remove the job
+- [ ] Schedule a script to run at `@reboot` and confirm it executes after a reboot
+- [ ] Run `crontab -l` on root and see if there are any system jobs already scheduled
+- [ ] Enable MySQL to start at boot with `systemctl enable mysql`, then reboot and check if it's running with `systemctl status mysql`
+- [ ] Try to write the cron syntax for: every day at 6:30 AM, only on weekdays - work it out before checking the answer
 
 The cron syntax takes a few tries to get comfortable with. Writing a few different schedules from scratch is the fastest way to internalize it.
 
+> 💡 *For deeper practice, I also recommend completing the end-of-chapter exercises in the official **Linux Basics for Hackers** book.*
 ---
 
-*Up next: Module 17 — Python Scripting*
+*Up next: Module 17 - Python Scripting*
