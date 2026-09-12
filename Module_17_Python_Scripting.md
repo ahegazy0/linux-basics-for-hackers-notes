@@ -1,11 +1,11 @@
 # Linux Basics for Hackers
-## Module 17 — Python Scripting
+## Module 17 - Python Scripting
 
 ---
 
-## What this module is about
+## Overview
 
-Bash scripting gets you far for simple automation and quick one-liners. Python is what you reach for when things get more complex — when you need to parse data, work with networks, build tools that make decisions, or understand the exploit code that other people have written. This module covers the Python fundamentals you need as a foundation for security work.
+Bash scripting gets you far for simple automation and quick one-liners. Python is what you reach for when things get more complex - when you need to parse data, work with networks, build tools that make decisions, or understand the exploit code that other people have written. This module covers the Python fundamentals you need as a foundation for security work.
 
 ---
 
@@ -13,7 +13,7 @@ Bash scripting gets you far for simple automation and quick one-liners. Python i
 
 Python has been the dominant language in security and hacking for a long time. The reasons aren't complicated:
 
-- The syntax is clean and readable — you can understand what a script does quickly
+- The syntax is clean and readable - you can understand what a script does quickly
 - The standard library covers networking, file I/O, cryptography, and more without installing anything extra
 - Thousands of third-party libraries exist for security-specific tasks
 - Most exploits, tools, and proof-of-concept code you'll find online are written in Python
@@ -25,18 +25,18 @@ Being able to read Python is genuinely useful even before you're writing your ow
 
 ## Python 2 vs Python 3
 
-Python 2 is dead — officially end-of-life since 2020. Everything you write should be Python 3. Kali ships with Python 3 as the default. When you see old tutorials using `print "hello"` without parentheses, that's Python 2 syntax. In Python 3 it's `print("hello")`.
+Python 2 is dead - officially end-of-life since 2020. Everything you write should be Python 3. Kali ships with Python 3 as the default. When you see old tutorials using `print "hello"` without parentheses, that's Python 2 syntax. In Python 3 it's `print("hello")`.
 
 Check your version:
 
 ```bash
-python3 --version
+ahegazy0@kali:~$ python3 --version
 ```
 
 Run the Python 3 interpreter:
 
 ```bash
-python3
+ahegazy0@kali:~$ python3
 ```
 
 This drops you into an interactive shell where you can type Python directly. Good for testing small things. Exit with `exit()` or `Ctrl+D`.
@@ -53,26 +53,26 @@ Create a file called `hello.py`:
 print("Hello, world")
 ```
 
-The shebang line is slightly different from Bash — `/usr/bin/env python3` finds the Python 3 interpreter wherever it lives on the system, which is more portable than hardcoding the path.
+The shebang line is slightly different from Bash - `/usr/bin/env python3` finds the Python 3 interpreter wherever it lives on the system, which is more portable than hardcoding the path.
 
 Run it:
 
 ```bash
-python3 hello.py
+ahegazy0@kali:~$ python3 hello.py
 ```
 
 Or make it executable and run it directly:
 
 ```bash
-chmod 755 hello.py
-./hello.py
+ahegazy0@kali:~$ chmod 755 hello.py
+ahegazy0@kali:~$ ./hello.py
 ```
 
 ---
 
 ## Variables and data types
 
-Python is dynamically typed — you don't declare types, you just assign values and Python figures it out.
+Python is dynamically typed - you don't declare types, you just assign values and Python figures it out.
 
 ```python
 name = "Alice"           # string
@@ -81,7 +81,7 @@ pi = 3.14                # float
 active = True            # boolean
 ```
 
-**Strings** — text, always in quotes:
+**Strings** - text, always in quotes:
 
 ```python
 target = "192.168.1.1"
@@ -89,29 +89,29 @@ print("Scanning: " + target)
 print(f"Scanning: {target}")    # f-string, cleaner way to embed variables
 ```
 
-**Integers** — whole numbers, used for ports, counts, indexes:
+**Integers** - whole numbers, used for ports, counts, indexes:
 
 ```python
 port = 22
 print(port + 1)    # 23
 ```
 
-**Lists** — ordered collections, like arrays:
+**Lists** - ordered collections, like arrays:
 
 ```python
 ports = [22, 80, 443, 3306]
-print(ports[0])      # 22 — indexing starts at 0
-print(ports[-1])     # 3306 — negative index counts from the end
+print(ports[0])      # 22 - indexing starts at 0
+print(ports[-1])     # 3306 - negative index counts from the end
 ```
 
-**Dictionaries** — key-value pairs, like a lookup table:
+**Dictionaries** - key-value pairs, like a lookup table:
 
 ```python
 user = {"username": "admin", "password": "password123", "role": "root"}
 print(user["username"])    # admin
 ```
 
-Dictionaries are very common in security scripts — you'll see them used for storing parsed data, HTTP headers, configuration values, and more.
+Dictionaries are very common in security scripts - you'll see them used for storing parsed data, HTTP headers, configuration values, and more.
 
 ---
 
@@ -128,7 +128,7 @@ print("Scanning " + target)
 port = int(input("Enter port: "))
 ```
 
-`int()` converts the string to an integer. Without this conversion, `"80" + 1` would throw an error — Python doesn't silently mix types.
+`int()` converts the string to an integer. Without this conversion, `"80" + 1` would throw an error - Python doesn't silently mix types.
 
 ---
 
@@ -145,7 +145,7 @@ else:
     print("Wrong password")
 ```
 
-Python uses indentation to define code blocks — no curly braces. The standard is 4 spaces. If your indentation is inconsistent, Python will throw an error. This is the thing that trips up almost every beginner coming from another language.
+Python uses indentation to define code blocks - no curly braces. The standard is 4 spaces. If your indentation is inconsistent, Python will throw an error. This is the thing that trips up almost every beginner coming from another language.
 
 Common comparison operators:
 
@@ -161,7 +161,7 @@ Common comparison operators:
 
 ## Loops
 
-**For loop** — iterate over a list or range:
+**For loop** - iterate over a list or range:
 
 ```python
 ports = [22, 80, 443]
@@ -176,7 +176,7 @@ for i in range(1, 256):
 
 `range(1, 256)` generates numbers from 1 to 255. This is how you'd build a basic IP range to scan.
 
-**While loop** — keep going while a condition is true:
+**While loop** - keep going while a condition is true:
 
 ```python
 attempts = 0
@@ -229,7 +229,7 @@ import os
 import sys
 ```
 
-**socket** — for network connections, the foundation of network tools:
+**socket** - for network connections, the foundation of network tools:
 
 ```python
 import socket
@@ -240,9 +240,9 @@ print("Connected")
 s.close()
 ```
 
-This opens a TCP connection to google.com on port 80 — the same thing a browser does when you visit a site over HTTP.
+This opens a TCP connection to google.com on port 80 - the same thing a browser does when you visit a site over HTTP.
 
-**os** — for interacting with the operating system:
+**os** - for interacting with the operating system:
 
 ```python
 import os
@@ -252,7 +252,7 @@ cwd = os.getcwd()             # get current directory
 files = os.listdir(".")       # list files in current directory
 ```
 
-**sys** — for system-level stuff like command-line arguments:
+**sys** - for system-level stuff like command-line arguments:
 
 ```python
 import sys
@@ -271,14 +271,14 @@ This lets you pass arguments to your script when you run it, rather than hardcod
 The standard library covers a lot, but the Python ecosystem has hundreds of thousands of third-party packages for specialized tasks:
 
 ```bash
-pip3 install requests
-pip3 install scapy
-pip3 install paramiko
+ahegazy0@kali:~$ pip3 install requests
+ahegazy0@kali:~$ pip3 install scapy
+ahegazy0@kali:~$ pip3 install paramiko
 ```
 
-- `requests` — cleaner HTTP requests than using socket directly
-- `scapy` — powerful packet crafting and analysis
-- `paramiko` — SSH connections in Python
+- `requests` - cleaner HTTP requests than using socket directly
+- `scapy` - powerful packet crafting and analysis
+- `paramiko` - SSH connections in Python
 
 Import after installing:
 
@@ -292,7 +292,7 @@ print(response.text)
 
 ---
 
-## A practical example — basic port scanner
+## A practical example - basic port scanner
 
 This brings together most of what's above into something actually useful:
 
@@ -318,7 +318,7 @@ for port in range(1, 1025):
 print("\nScan complete.")
 ```
 
-`connect_ex` tries to connect and returns an error code rather than throwing an exception — 0 means success (port is open). `settimeout(1)` means don't wait more than 1 second per port before moving on.
+`connect_ex` tries to connect and returns an error code rather than throwing an exception - 0 means success (port is open). `settimeout(1)` means don't wait more than 1 second per port before moving on.
 
 This is a simplified version of what nmap does. Understanding it makes nmap's output make a lot more sense.
 
@@ -339,15 +339,15 @@ finally:
     s.close()
 ```
 
-`try` — attempt this
-`except` — if it fails, run this instead
-`finally` — run this no matter what (cleanup code goes here)
+`try` - attempt this
+`except` - if it fails, run this instead
+`finally` - run this no matter what (cleanup code goes here)
 
 Without error handling, one failed connection crashes the entire script. With it, your script keeps running and tells you what went wrong.
 
 ---
 
-## Command reference
+## Command Reference
 
 | Command | What it does |
 |---|---|
@@ -380,26 +380,27 @@ Without error handling, one failed connection crashes the entire script. With it
 
 ## Practice
 
-- Write a script that asks for your name and prints a greeting using an f-string
-- Write a script that loops through ports 20–25 and prints each one
-- Build the port scanner above and test it against `127.0.0.1` (your own machine) — see which ports are open on yourself
-- Write a script that asks for a password and prints "correct" or "incorrect" based on a hardcoded value
-- Once you're comfortable with those: add error handling to the port scanner so a network error doesn't crash the whole scan
+- [ ] Write a script that asks for your name and prints a greeting using an f-string
+- [ ] Write a script that loops through ports 20–25 and prints each one
+- [ ] Build the port scanner above and test it against `127.0.0.1` (your own machine) - see which ports are open on yourself
+- [ ] Write a script that asks for a password and prints "correct" or "incorrect" based on a hardcoded value
+- [ ] Once you're comfortable with those: add error handling to the port scanner so a network error doesn't crash the whole scan
 
+> 💡 *For deeper practice, I also recommend completing the end-of-chapter exercises in the official **Linux Basics for Hackers** book.*
 ---
 
 ## Where to go from here
 
 This module is a foundation. The book ends here, but Python for security work goes much deeper:
 
-- **Scapy** — craft and send custom packets, build your own scanners and sniffers at the packet level
-- **Paramiko** — automate SSH connections, useful for scripting access to remote systems
-- **Requests + BeautifulSoup** — web scraping and HTTP interaction
-- **Subprocess** — call system commands from Python and capture their output
-- Reading existing exploit code — most CVE proof-of-concepts on GitHub are Python. Being able to read and modify them is one of the most practical skills in this field.
+- **Scapy** - craft and send custom packets, build your own scanners and sniffers at the packet level
+- **Paramiko** - automate SSH connections, useful for scripting access to remote systems
+- **Requests + BeautifulSoup** - web scraping and HTTP interaction
+- **Subprocess** - call system commands from Python and capture their output
+- Reading existing exploit code - most CVE proof-of-concepts on GitHub are Python. Being able to read and modify them is one of the most practical skills in this field.
 
 The pattern going forward is the same as it's been throughout this course: understand the concept, run the commands, break things in your VM, and look things up when they don't work. That's how this stuff actually gets learned.
 
 ---
 
-*End of Linux Basics for Hackers — 17 Modules Complete.*
+*End of Linux Basics for Hackers - 17 Modules Complete.*
