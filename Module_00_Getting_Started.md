@@ -42,9 +42,9 @@ Your real computer (Windows or macOS)
     └── Kali Linux VM  ← this is where you practice
 ```
 
-Your real computer is called the **host**. The VM is called the **guest**. Whatever happens inside the guest stays inside the guest. If you break something, you reset the VM and it's gone. Your host machine never even notices.
+Your real computer is called the **host**. The VM is called the **guest**. A VM provides isolation, but it is not a perfect safety boundary: shared folders, clipboard integration, network access, resource use, or a hypervisor vulnerability can let guest activity affect the host or other systems. A snapshot can help you restore a guest, but it does not undo effects outside the VM.
 
-This is why professionals always test exploits inside VMs first. If you accidentally run something destructive, the VM takes the hit, not your real system.
+Use a disposable VM for practice, keep host backups, and disable shared folders, shared clipboard, and bridged networking unless an exercise needs them. Never run an untrusted command or exploit on your host. A VM reduces risk; it does not make destructive actions harmless.
 
 ---
 
