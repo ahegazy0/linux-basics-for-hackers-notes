@@ -1,4 +1,5 @@
-# Linux Basics for Hackers - Notes
+# Linux Basics for Hackers - Notes 
+A community-maintained [Simplified Chinese translation (简体中文)](https://github.com/4444Hao/zh-linux-basics-for-hackers-notes) of these notes is available.
 
 A structured set of study notes based on the book *Linux Basics for Hackers* by OccupyTheWeb. Originally compiled during personal lab practice in Obsidian, then structured and organized with AI assistance for clarity, consistency, and easy navigation.
 
